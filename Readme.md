@@ -1,5 +1,7 @@
 # Pobin a memory template loader
 
+[![Build Status](https://travis-ci.org/sharpner/pobin.svg?branch=master)](https://travis-ci.org/sharpner/pobin)
+
 Pobin is a Template Loader for [pongo2](https://github.com/flosch/pongo2) that is used to
 load assets from [go-bindata](https://github.com/jteeuwen/go-bindata).
 
