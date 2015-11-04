@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"io"
 	"path/filepath"
-	"strings"
 
 	"github.com/flosch/pongo2"
 )
@@ -20,16 +19,15 @@ func NewMemoryTemplateLoader(loaderFunc func(path string) ([]byte, error)) pongo
 }
 
 func (m memoryTemplateLoader) Abs(base, name string) string {
-	if !filepath.IsAbs(name) {
-		if !strings.HasPrefix(name, "templates") {
-			//TODO don't hardcode this prefix
-			return "templates/sites/" + name
-		}
-
+	if filepath.IsAbs(name) || base == "" {
 		return name
 	}
 
-	return base
+	if name == "" {
+		return base
+	}
+
+	return filepath.Dir(base) + string(filepath.Separator) + name
 }
 
 func (m memoryTemplateLoader) Get(path string) (io.Reader, error) {
